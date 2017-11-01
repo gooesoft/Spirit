@@ -25,6 +25,7 @@ gulp.task('_sass', function () {
 gulp.task('_css-minify', ['_sass'], function() {
     var path = cssPath + 'vendors/';
     return gulp.src([
+            '!'+path + 'font-awesome.min.css',
             path + '*.min.css',
             cssPath + 'styles.css',
         ])
@@ -42,7 +43,7 @@ gulp.task('coffee', function() {
     var pathCoffee = jsPath + 'src/';
     var pathJs = jsPath + 'js/';
     return gulp.src([
-            pathVendors + 'jquery.min.js',
+            '!'+pathVendors + 'jquery.min.js',
             pathVendors + 'atwho/jquery.caret.min.js',
             pathVendors + 'atwho/jquery.atwho.min.js',
             pathVendors + '**/*.js',
@@ -60,6 +61,7 @@ gulp.task('coffee', function() {
             .pipe(concat('all.min.js'))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(jsPath))
+
 });
 
 

@@ -36,7 +36,7 @@ def administrator_required(view_func):
             return redirect_to_login(next=request.get_full_path(),
                                      login_url=settings.LOGIN_URL)
 
-        if not user.st.is_administrator:
+        if not user.st.is_administrator and not user.is_superuser:
             raise PermissionDenied
 
         return view_func(request, *args, **kwargs)
