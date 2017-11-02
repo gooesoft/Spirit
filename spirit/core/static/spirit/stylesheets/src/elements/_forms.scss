@@ -38,11 +38,11 @@ input[type="checkbox"] {
   margin-bottom: $base-spacing-size;
 }
 
-label {
+.st-label {
   display: block;
   margin-bottom: $half-spacing-size;
   font-size: 18px;
-  
+
   input[type="checkbox"] {
     display: inline;
     margin: $half-spacing-size / 2 $half-spacing-size;

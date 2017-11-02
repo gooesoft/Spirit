@@ -11,11 +11,11 @@
 }
 
 .inline-list,
-%inline-list {
+%inline-list  {
   li {
 	@extend %inline-block;
 	margin-left: $half-spacing-size;
-	
+
 	&:first-child {
       margin-left: 0;
     }
