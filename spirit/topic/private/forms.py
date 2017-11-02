@@ -67,7 +67,7 @@ class TopicPrivateManyForm(forms.Form):
     users = forms.ModelMultipleChoiceField(
         queryset=User.objects.all(),
         to_field_name=User.USERNAME_FIELD,
-        widget=MultipleInput(attrs={'placeholder': _("user1, user2, ...")}))
+        widget=MultipleInput(attrs={'placeholder': _("username1, username2, ...")}))
 
     def __init__(self, user=None, topic=None, *args, **kwargs):
         super(TopicPrivateManyForm, self).__init__(*args, **kwargs)
