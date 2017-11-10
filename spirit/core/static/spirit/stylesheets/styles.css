@@ -6533,16 +6533,6 @@ td,
 th {
   padding: 0; }
 
-::selection {
-  background: #ededed;
-  color: #fefefe;
-  text-shadow: none; }
-
-::-moz-selection {
-  background: #ededed;
-  color: #fefefe;
-  text-shadow: none; }
-
 i {
   color: inherit; }
 
