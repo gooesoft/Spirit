@@ -6974,9 +6974,6 @@ input[type="submit"].button,
       .categories:last-child {
         margin-right: 0; } }
 
-.tab-content {
-  display: none; }
-
 .new-topic {
   float: left;
   display: block;
