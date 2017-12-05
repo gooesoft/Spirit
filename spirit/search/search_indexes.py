@@ -8,7 +8,7 @@ from haystack import indexes
 
 from ..core.conf import settings
 from ..topic.models import Topic
-
+from celery_haystack.indexes import CelerySearchIndex
 
 # See: django-haystack issue #801
 # convert() from search-engine
@@ -29,7 +29,7 @@ class BooleanField(indexes.BooleanField):
         return bool(value)
 
 
-class TopicIndex(indexes.SearchIndex, indexes.Indexable):
+class TopicIndex(CelerySearchIndex, indexes.Indexable):
 
     text = indexes.CharField(document=True, use_template=True, stored=False)
     category_id = indexes.IntegerField(model_attr='category_id', stored=False)
