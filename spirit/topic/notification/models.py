@@ -9,7 +9,7 @@ from django.db import IntegrityError, transaction
 
 from .managers import TopicNotificationQuerySet
 from ...core.conf import settings
-
+from . import signals
 
 UNDEFINED, MENTION, COMMENT = range(3)
 
@@ -84,6 +84,8 @@ class TopicNotification(models.Model):
             .exclude(user=comment.user)\
             .update(comment=comment, is_read=False, action=COMMENT, date=timezone.now())
 
+        signals.notify_new_comment.send(sender=None, topic=comment.topic, user=comment.user)
+
     @classmethod
     def notify_new_mentions(cls, comment, mentions):
         if not mentions:
@@ -106,6 +108,9 @@ class TopicNotification(models.Model):
         cls.objects\
             .filter(user__in=mentions.values(), topic=comment.topic, is_read=True)\
             .update(comment=comment, is_read=False, action=MENTION, date=timezone.now())
+
+        signals.notify_new_mentions.send(sender=cls, topic=comment.topic, user=comment.user)
+
 
     @classmethod
     def bulk_create(cls, users, comment):
