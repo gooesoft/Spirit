@@ -51,11 +51,12 @@ def publish(request, user_id=None):
             topic = tform.save()
             cform.topic = topic
             comment = cform.save()
-            comment_posted(comment=comment, mentions=None)
+
             tpform.topic = topic
             tpform.save_m2m()
             TopicNotification.bulk_create(
                 users=tpform.get_users(), comment=comment)
+            comment_posted(comment=comment, mentions=None)
             return redirect(topic.get_absolute_url())
     else:
         tform = TopicForPrivateForm()

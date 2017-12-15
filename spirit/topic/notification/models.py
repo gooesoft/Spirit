@@ -66,7 +66,7 @@ class TopicNotification(models.Model):
     @classmethod
     def create_maybe(cls, user, comment, is_read=True, action=COMMENT):
         # Create a dummy notification
-        return cls.objects.get_or_create(
+        return cls.objects.update_or_create(
             user=user,
             topic=comment.topic,
             defaults={
@@ -84,7 +84,7 @@ class TopicNotification(models.Model):
             .exclude(user=comment.user)\
             .update(comment=comment, is_read=False, action=COMMENT, date=timezone.now())
 
-        signals.notify_new_comment.send(sender=None, topic=comment.topic, user=comment.user)
+
 
     @classmethod
     def notify_new_mentions(cls, comment, mentions):
@@ -109,7 +109,6 @@ class TopicNotification(models.Model):
             .filter(user__in=mentions.values(), topic=comment.topic, is_read=True)\
             .update(comment=comment, is_read=False, action=MENTION, date=timezone.now())
 
-        signals.notify_new_mentions.send(sender=cls, topic=comment.topic, user=comment.user)
 
 
     @classmethod
