@@ -5,7 +5,7 @@ import datetime
 import hashlib
 
 from django.test import TestCase, override_settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template import Template, Context
 from django.utils import timezone
 
@@ -529,6 +529,78 @@ class TopicPrivateFormTest(TestCase):
         self.assertEqual(len(privates_saved), 2)
         privates = TopicPrivate.objects.all()
         self.assertEqual([p.user.pk for p in privates], [self.user2.pk, self.user.pk])
+
+    @override_settings(ST_CASE_INSENSITIVE_USERNAMES=True)
+    def test_private_invite_case_insensitive(self):
+        user1 = utils.create_user(username='UnIQuEfOo')
+        self.assertNotEqual(
+            user1.username, user1.username.upper())
+        form_data = {'user': user1.username.upper()}
+        private = utils.create_private_topic(user=self.user)
+        form = TopicPrivateInviteForm(private.topic, data=form_data)
+        self.assertEqual(form.is_valid(), True)
+
+        # regular username should still work
+        form_data = {'user': user1.username}
+        private = utils.create_private_topic(user=self.user)
+        form = TopicPrivateInviteForm(private.topic, data=form_data)
+        self.assertEqual(form.is_valid(), True)
+
+    @override_settings(ST_CASE_INSENSITIVE_USERNAMES=False)
+    def test_private_invite_case_insensitive_off(self):
+        user1 = utils.create_user(username='UnIQuEfOo')
+        self.assertNotEqual(
+            user1.username, user1.username.upper())
+        form_data = {'user': user1.username.upper()}
+        private = utils.create_private_topic(user=self.user)
+        form = TopicPrivateInviteForm(private.topic, data=form_data)
+        self.assertEqual(form.is_valid(), False)
+
+        # regular username should still work
+        form_data = {'user': user1.username}
+        private = utils.create_private_topic(user=self.user)
+        form = TopicPrivateInviteForm(private.topic, data=form_data)
+        self.assertEqual(form.is_valid(), True)
+
+    @override_settings(ST_CASE_INSENSITIVE_USERNAMES=True)
+    def test_private_create_many_case_insensitive(self):
+        """
+        create many private topics accesses
+        """
+        user1 = utils.create_user(username='UnIQuEfOo')
+        user2 = utils.create_user(username='uniquebar')
+        self.assertNotEqual(
+            user1.username, user1.username.upper())
+        self.assertEqual(
+            user2.username, 'uniquebar')
+        users = '%s, %s' % (
+            user1.username.upper(), 'uniquebar')
+        form_data = {'users': users}
+        form = TopicPrivateManyForm(self.user, data=form_data)
+        self.assertEqual(form.is_valid(), True)
+
+    @override_settings(ST_CASE_INSENSITIVE_USERNAMES=False)
+    def test_private_create_many_case_insensitive_off(self):
+        """
+        create many private topics accesses
+        """
+        user1 = utils.create_user(username='UnIQuEfOo')
+        user2 = utils.create_user(username='uniquebar')
+        self.assertNotEqual(
+            user1.username, user1.username.upper())
+        self.assertEqual(
+            user2.username, 'uniquebar')
+        users = '%s, %s' % (
+            user1.username.upper(), 'uniquebar')
+        form_data = {'users': users}
+        form = TopicPrivateManyForm(self.user, data=form_data)
+        self.assertEqual(form.is_valid(), False)
+
+        users = 'UnIQuEfOo, uniquebar'
+        form_data = {'users': users}
+        form = TopicPrivateManyForm(self.user, data=form_data)
+        print(form.errors)
+        self.assertEqual(form.is_valid(), True)
 
     def test_private_create(self):
         """

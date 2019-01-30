@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
@@ -65,7 +65,7 @@ def publish(request, user_id=None):
 
         if user_id:  # todo: move to form
             user_to = get_object_or_404(User, pk=user_id)
-            initial = {'users': [user_to.username]}
+            initial = {'users': [user_to.st.nickname]}
 
         tpform = TopicPrivateManyForm(initial=initial)
 
@@ -150,8 +150,7 @@ def join_in(request, topic_id):
         Topic,
         pk=topic_id,
         user=request.user,
-        category_id=settings.ST_TOPIC_PRIVATE_CATEGORY_PK
-    )
+        category_id=settings.ST_TOPIC_PRIVATE_CATEGORY_PK)
 
     if request.method == 'POST':
         form = TopicPrivateJoinForm(topic=topic, user=request.user, data=request.POST)

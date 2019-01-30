@@ -43,11 +43,9 @@ gulp.task('coffee', function() {
     var pathCoffee = jsPath + 'src/';
     var pathJs = jsPath + 'js/';
     return gulp.src([
-            '!'+pathVendors + 'jquery.min.js',
-            pathVendors + 'atwho/jquery.caret.min.js',
-            pathVendors + 'atwho/jquery.atwho.min.js',
             pathVendors + '**/*.js',
             pathVendors + '**/*.coffee',
+            pathCoffee + 'modules.coffee',
             pathCoffee + 'util.coffee',
             pathCoffee + 'tab.coffee',
             pathCoffee + 'editor_file_upload.coffee',

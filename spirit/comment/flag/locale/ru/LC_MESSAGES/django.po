@@ -1,20 +1,23 @@
-#
+# 
+# Translators:
+# Timour Ghinatoulline <t.ginatullin@plusone.su>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Spirit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 19:55+0000\n"
-"PO-Revision-Date: 2015-07-25 18:00+0000\n"
-"Last-Translator: Esteban M. Castro Borsani <ecastroborsani@gmail.com>\n"
-"Language-Team: Spirit\n"
-"Language: \n"
+"POT-Creation-Date: 2018-11-26 00:12+0000\n"
+"PO-Revision-Date: 2018-01-30 15:41+0000\n"
+"Last-Translator: Timour Ghinatoulline <t.ginatullin@plusone.su>\n"
+"Language-Team: Russian (http://www.transifex.com/spirit-project/spirit/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: forms.py:32
 msgid "This flag already exists"
-msgstr ""
+msgstr "Эта пометка уже существует."
 
 #: models.py:12
 msgid "Spam"
@@ -24,36 +27,36 @@ msgstr "Спам"
 msgid "Other"
 msgstr "Другой"
 
-#: models.py:28
+#: models.py:33
 msgid "comment flag"
-msgstr ""
+msgstr "пометка комментария"
 
-#: models.py:29
+#: models.py:34
 msgid "comments flags"
-msgstr ""
+msgstr "пометки комментариев"
 
-#: models.py:41
+#: models.py:51
 msgid "reason"
 msgstr "причина"
 
-#: models.py:42
+#: models.py:52
 msgid "body"
-msgstr ""
+msgstr "тело"
 
-#: models.py:47
+#: models.py:57
 msgid "flag"
-msgstr ""
+msgstr "пометка"
 
-#: models.py:48
+#: models.py:58
 msgid "flags"
-msgstr ""
+msgstr "пометки"
 
 #: templates/spirit/comment/flag/create.html:5
-#: templates/spirit/comment/flag/create.html:14
+#: templates/spirit/comment/flag/create.html:18
 msgid "Report"
-msgstr "Отчёт"
+msgstr "Пожаловаться"
 
-#: templates/spirit/comment/flag/create.html:9
+#: templates/spirit/comment/flag/create.html:10
 #, python-format
 msgid "Reporting %(username)s's comment"
-msgstr ""
+msgstr "Пожаловаться на комментарий пользователя %(username)s"

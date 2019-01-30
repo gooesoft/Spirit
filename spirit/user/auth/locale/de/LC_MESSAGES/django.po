@@ -1,51 +1,77 @@
-#
+# 
 # Translators:
+# datKater <imperator.katz@gmail.com>, 2016
+# Sven Hessenmüller <sven.hessenmueller@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Spirit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 19:55+0000\n"
-"PO-Revision-Date: 2015-10-14 19:36+0000\n"
-"Last-Translator: Esteban M. Castro Borsani <ecastroborsani@gmail.com>\n"
-"Language-Team: German (http://www.transifex.com/spirit-project/spirit/"
-"language/de/)\n"
-"Language: de\n"
+"POT-Creation-Date: 2018-11-26 00:12+0000\n"
+"PO-Revision-Date: 2018-01-30 15:40+0000\n"
+"Last-Translator: Sven Hessenmüller <sven.hessenmueller@gmail.com>\n"
+"Language-Team: German (http://www.transifex.com/spirit-project/spirit/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:18
+#: forms.py:19
+msgid "Email confirmation"
+msgstr "E-Mail Bestätigung"
+
+#: forms.py:22
+msgid "Enter the same email as above, for verification."
+msgstr "Gib die selbe E-Mail-Adresse wie oben ein, um Tippfehler auszuschließen."
+
+#: forms.py:25
+msgid "Password"
+msgstr "Passwort"
+
+#: forms.py:26
 msgid "Leave blank"
 msgstr "leer lassen"
 
-#: forms.py:33
+#: forms.py:41
 msgid "Do not fill this field."
 msgstr "Dieses Feld nicht ausfüllen."
 
-#: forms.py:45
+#: forms.py:53
 msgid "The username is taken."
 msgstr "Der Username ist vergeben."
 
-#: forms.py:56
+#: forms.py:66
+msgid "The two email fields didn't match."
+msgstr "Die beiden Email Felder stimmen nicht überein."
+
+#: forms.py:79
 msgid "Username or Email"
 msgstr "Username oder E-Mail"
 
-#: forms.py:61
+#: forms.py:83
+msgid "The password is not valid."
+msgstr "Das Passwort ist falsch."
+
+#: forms.py:115
+#, python-format
+msgid "No account matches %(username)s."
+msgstr "Kein Benutzerkonto %(username)s vorhanden."
+
+#: forms.py:125
 msgid "Email"
 msgstr "E-Mail"
 
-#: forms.py:74
+#: forms.py:138
 msgid "The provided email does not exists."
 msgstr "Die angegebene Email existiert nicht."
 
-#: forms.py:82
+#: forms.py:146
 msgid "This account is verified, try logging-in."
-msgstr ""
+msgstr "Dieser Account ist verifiziert, versuche dich anzumelden"
 
 #: templates/spirit/user/auth/activation_resend.html:5
 #: templates/spirit/user/auth/activation_resend.html:9
-#: templates/spirit/user/auth/login.html:23
+#: templates/spirit/user/auth/login.html:26
 msgid "Resend activation email"
 msgstr "Aktivationsmail erneut senden"
 
@@ -59,11 +85,11 @@ msgstr "Email erneut senden"
 msgid "Login"
 msgstr "Anmelden"
 
-#: templates/spirit/user/auth/login.html:21
+#: templates/spirit/user/auth/login.html:22
 msgid "Create an account"
 msgstr "Konto erstellen"
 
-#: templates/spirit/user/auth/login.html:22
+#: templates/spirit/user/auth/login.html:24
 msgid "I don't know my password"
 msgstr "Ich habe mein Passwort vergessen"
 
@@ -105,9 +131,7 @@ msgstr "Zurücksetzen des Passworts nicht erfolgreich"
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
-msgstr ""
-"Der Link zum Passwort zurücksetzen war ungültig. Möglicherweise war er schon "
-"benutzt. Bitte fordere ein nochmaliges Zurücksetzen des Passwortes an."
+msgstr "Der Link zum Passwort zurücksetzen war ungültig. Möglicherweise war er schon benutzt. Bitte fordere ein nochmaliges Zurücksetzen des Passwortes an."
 
 #: templates/spirit/user/auth/password_reset_done.html:5
 #: templates/spirit/user/auth/password_reset_done.html:9
@@ -118,37 +142,30 @@ msgstr "Zurücksetzen des Passwortes erfolgreich"
 msgid ""
 "We've emailed you instructions for setting your password. You should be "
 "receiving them shortly."
-msgstr ""
-"Wir haben dir eine Anleitung zum zurücksetzen deines Passwortes per E-Mail "
-"gesendet. Du solltest sie in Kürze erhalten."
+msgstr "Wir haben dir eine Anleitung zum zurücksetzen deines Passwortes per E-Mail gesendet. Du solltest sie in Kürze erhalten."
 
-#: templates/spirit/user/auth/password_reset_done.html:12 views.py:113
+#: templates/spirit/user/auth/password_reset_done.html:12 views.py:147
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
-msgstr ""
-"Wenn du keine E-Mail erhältst, überprüfe bitte ob du die E-Mailadresse "
-"angegeben hast, mit welcher du registriert bist und überprüfe deinen SPAM-"
-"Ordner."
+msgstr "Wenn du keine E-Mail erhältst, überprüfe bitte ob du die E-Mailadresse angegeben hast, mit welcher du registriert bist und überprüfe deinen SPAM-Ordner."
 
 #: templates/spirit/user/auth/password_reset_email.html:2
 #, python-format
 msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account at %(site_name)s."
-msgstr ""
-"Du erhältst diese Email da du um das Zurücksetzen deines Passwortes bei "
-"%(site_name)s angesucht hast."
+msgstr "Du erhältst diese Email da du um das Zurücksetzen deines Passwortes bei %(site_name)s angesucht hast."
 
-#: templates/spirit/user/auth/password_reset_email.html:4
+#: templates/spirit/user/auth/password_reset_email.html:7
 msgid "Please go to the following page and choose a new password:"
 msgstr "Bitte gehe zur folgenden Seite und wähle ein neues Passwort:"
 
-#: templates/spirit/user/auth/password_reset_email.html:9
+#: templates/spirit/user/auth/password_reset_email.html:12
 msgid "Thanks for using our site!"
 msgstr "Danke für das Benutzen unserer Website!"
 
-#: templates/spirit/user/auth/password_reset_email.html:11
+#: templates/spirit/user/auth/password_reset_email.html:14
 #, python-format
 msgid "The %(site_name)s team"
 msgstr "Das %(site_name)s Team"
@@ -168,21 +185,21 @@ msgid "Password reset on %(site_name)s"
 msgstr "Passwort zurücksetzen unter %(site_name)s"
 
 #: templates/spirit/user/auth/register.html:5
-#: templates/spirit/user/auth/register.html:22
 #: templates/spirit/user/auth/register.html:28
+#: templates/spirit/user/auth/register.html:34
 msgid "Register"
 msgstr "Registrieren"
 
-#: tests/tests.py:89 tests/tests.py:210
+#: tests/tests.py:90 tests/tests.py:225
 msgid "User activation"
-msgstr ""
+msgstr "Benutzer-Aktivierung"
 
-#: views.py:67
+#: views.py:101
 #, python-format
 msgid ""
 "We have sent you an email to %(email)s so you can activate your account!"
-msgstr ""
+msgstr "Wir haben dir eine E-Mail an %(email)s gesandt damit du deinen Zugang aktivieren kannst!"
 
-#: views.py:94
+#: views.py:126
 msgid "Your account has been activated!"
 msgstr "Dein Zugang wurde aktiviert!"

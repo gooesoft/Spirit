@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spirit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 19:55+0000\n"
+"POT-Creation-Date: 2018-11-26 00:12+0000\n"
 "PO-Revision-Date: 2015-07-25 18:00+0000\n"
 "Last-Translator: Esteban M. Castro Borsani <ecastroborsani@gmail.com>\n"
 "Language-Team: Spirit\n"
@@ -24,36 +24,36 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: models.py:28
+#: models.py:33
 msgid "comment flag"
 msgstr ""
 
-#: models.py:29
+#: models.py:34
 msgid "comments flags"
 msgstr ""
 
-#: models.py:41
+#: models.py:51
 msgid "reason"
 msgstr ""
 
-#: models.py:42
+#: models.py:52
 msgid "body"
 msgstr ""
 
-#: models.py:47
+#: models.py:57
 msgid "flag"
 msgstr ""
 
-#: models.py:48
+#: models.py:58
 msgid "flags"
 msgstr ""
 
 #: templates/spirit/comment/flag/create.html:5
-#: templates/spirit/comment/flag/create.html:14
+#: templates/spirit/comment/flag/create.html:18
 msgid "Report"
 msgstr ""
 
-#: templates/spirit/comment/flag/create.html:9
+#: templates/spirit/comment/flag/create.html:10
 #, python-format
 msgid "Reporting %(username)s's comment"
 msgstr ""

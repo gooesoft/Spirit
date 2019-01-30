@@ -48,6 +48,8 @@ def create_private_topic(**kwargs):
 def create_category(**kwargs):
     if 'title' not in kwargs:
         kwargs['title'] = "category_foo%d" % Category.objects.all().count()
+    if 'sort' not in kwargs:
+        kwargs['sort'] = Category.objects.all().count() + 1
 
     return Category.objects.create(**kwargs)
 
@@ -75,7 +77,9 @@ def create_comment(**kwargs):
 def login(test_case_instance, user=None, password=None):
     user = user or test_case_instance.user
     password = password or "bar"
-    login_successful = test_case_instance.client.login(username=user.username, password=password)
+    login_successful = test_case_instance.client.login(
+        username=user.username,
+        password=password)
     test_case_instance.assertTrue(login_successful)
 
 

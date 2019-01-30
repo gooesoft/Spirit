@@ -26,15 +26,17 @@ try:
 except ImportError as err:
     # There used to be a logger.exception here but
     # the traceback made things confusing when an unhandled was raised
-    logger.warning(
-        'Can\'t load python-magic. '
-        'Is libmagic installed?')
-    logger.error(err)
+    if settings.ST_UPLOAD_FILE_ENABLED:
+        logger.info(
+            'File upload requires running: '
+            '`pip install django-spirit[files]`')
+        raise err
     magic = None
 
 
 class CommentForm(forms.ModelForm):
     comment = forms.CharField(
+        label=_('Comment'),
         max_length=settings.ST_COMMENT_MAX_LEN,
         widget=forms.Textarea)
     comment_hash = forms.CharField(
@@ -139,11 +141,11 @@ class CommentImageForm(forms.Form):
         file = self.cleaned_data['image']
         ext = os.path.splitext(file.name)[1].lstrip('.')
 
-        if (ext not in settings.ST_ALLOWED_UPLOAD_IMAGE_FORMAT or
+        if (ext.lower() not in settings.ST_ALLOWED_UPLOAD_IMAGE_FORMAT or
                 file.image.format.lower() not in settings.ST_ALLOWED_UPLOAD_IMAGE_FORMAT):
             raise forms.ValidationError(
-                _("Unsupported file format. Supported formats are %s." %
-                  ", ".join(settings.ST_ALLOWED_UPLOAD_IMAGE_FORMAT)))
+                _("Unsupported file format. Supported formats are %s.") %
+                  ", ".join(settings.ST_ALLOWED_UPLOAD_IMAGE_FORMAT))
 
         return file
 
@@ -177,10 +179,11 @@ class CommentFileForm(forms.Form):
 
         if mime is None:
             raise forms.ValidationError(
-                _("Unsupported file extension %s. Supported extensions are %s." % (
-                    ext,
-                    ", ".join(
-                        sorted(settings.ST_ALLOWED_UPLOAD_FILE_MEDIA_TYPE.keys())))))
+                _("Unsupported file extension %(extension)s. "
+                  "Supported extensions are %(supported)s.") % {
+                    'extension': ext,
+                    'supported': ", ".join(
+                        sorted(settings.ST_ALLOWED_UPLOAD_FILE_MEDIA_TYPE.keys()))})
 
         try:
             if isinstance(file, TemporaryUploadedFile):
@@ -193,10 +196,11 @@ class CommentFileForm(forms.Form):
 
         if mime != file_mime:
             raise forms.ValidationError(
-                _("Unsupported file mime type %s. Supported types are %s." % (
-                    file_mime,
-                    ", ".join(
-                        sorted(settings.ST_ALLOWED_UPLOAD_FILE_MEDIA_TYPE.values())))))
+                _("Unsupported file mime type %(mime)s. "
+                  "Supported types are %(supported)s.") % {
+                    'mime': file_mime,
+                    'supported': ", ".join(
+                        sorted(settings.ST_ALLOWED_UPLOAD_FILE_MEDIA_TYPE.values()))})
 
         return file
 

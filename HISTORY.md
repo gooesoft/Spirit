@@ -1,3 +1,60 @@
+0.7.1 (unreleased)
+==================
+
+* Update `mistune` and `Pillow` dependencies
+* Remove `uni-slugify` and `Unidecode` dependencies
+
+0.7.0
+==================
+
+* Breakig change: usernames are now case-insensitive,
+  set `ST_CASE_INSENSITIVE_USERNAMES = False` to
+  disable this feature. Disabling it is likely
+  required for existing instances of Spirit due
+  to clashing usernames
+* New: case insensitive usernames
+
+0.6.3
+==================
+
+* Fix private forum restriction regression where
+  an anonymous user was able to view sections
+  other than the index
+* Make bookmark save latest place only,
+  going back to a previous page won't
+  update the bookmark anymore (PR #245)
+* Update locales/translations
+
+0.6.2
+==================
+
+* Fix password reset
+* Make admin user-list redirect to the right
+  user profile when clicking on a username
+
+0.6.1
+==================
+
+* Update dependencies: `pillow==5.2.0` and `django-djconfig==0.8.0`
+
+0.6.0
+==================
+
+* Drops support for Django 1.8, 1.9 and 1.10
+* Adds support for Python 3.7 (no changes required)
+* Adds support for Django 2.0 and 2.1
+* Adds `django.middleware.security.SecurityMiddleware``to
+  `MIDDLEWARE_CLASSES` setting
+* Adds `LOGOUT_REDIRECT_URL = 'spirit:index'` to settings
+* Removes jQuery dependency in favor of vanilla JS
+* Fixes user's `last_seen` feature. There was a bug in the middleware
+  that would update the field pretty much on every request
+* Renames `MIDDLEWARE_CLASSES` (deprecated by django) setting to
+  `MIDDLEWARE`
+* Removes `spirit.settings` deprecated in Spirit 0.5
+* Avoids installing `spirit.topic.poll` app in the generated project
+* Updates haystack dependency to 2.8.1
+
 0.5.0
 ==================
 
@@ -5,6 +62,17 @@
 * Adds support for Python 3.6
 * Adds support for Django 1.9, 1.10 and 1.11
 * Adds python-magic dependency (to check uploaded files)
+* Improvement: focus on comment editor after
+  clicking a format button. PR #219 (thanks to @cryptogun)
+* Fixes: untranslated strings. PR #218 (thanks to @cryptogun)
+* Fixes: missing link on admin flag. PR #217 (thanks to @cryptogun)
+* Fixes: `XForwardedForMiddleware` middleware and
+  gunicorn error. PR #216 (thanks to @cryptogun)
+* Improvement: Add `@username` on comment editor
+  when clicking on a reply link. PR #212 (thanks to @cryptogun)
+* Improvement: notifications page drop-down
+  menu for read/unread. PR #213 (thanks to @cryptogun)
+* New: lithuanian translation, thanks to @sirex
 * New: file upload on comments
 * Improvement: Adds `ST_UPLOAD_IMAGE_ENABLED`
   to enable/disable image uploads and `ST_UPLOAD_FILE_ENABLED`
@@ -14,6 +82,7 @@
   read the wiki or the PR for a workaround
 * Updates mistune, haystack and woosh dependencies
 * Deprecates `spirit.settings`. It will be removed in future releases
+* Updates locales
 
 0.4.8
 ==================

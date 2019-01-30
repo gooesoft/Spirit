@@ -11,6 +11,8 @@ import os
 #: The category's PK containing all of the private topics.
 #: The category is auto-created and so this value should not change
 ST_TOPIC_PRIVATE_CATEGORY_PK = 1
+#: Enable/disable category ordering.
+ST_ORDERED_CATEGORIES = False
 
 #: Enable/disable the rate-limit for all forms
 ST_RATELIMIT_ENABLE = True
@@ -63,10 +65,12 @@ ST_UPLOAD_IMAGE_ENABLED = True
 #:     See `Django notes <https://docs.djangoproject.com/en/1.11/topics/security/#user-uploaded-content>`_
 ST_ALLOWED_UPLOAD_IMAGE_FORMAT = ('jpeg', 'jpg', 'gif')
 
-#: Enable/disable file uploads within posts
-ST_UPLOAD_FILE_ENABLED = True
+#: Enable/disable file uploads within posts.
+#: Requires running ``pip install django-spirit[files]`` to install
+#: `python-magic <https://github.com/ahupp/python-magic#installation>`_
+ST_UPLOAD_FILE_ENABLED = False
 #: Uploaded files will be validated against these formats.
-#: This is a map of extension and media-type. Both are used for validation.
+#: This is a map of extension and media-type. Both are used for validation
 #:
 #: .. Note::
 #:     To find a media-type just add an extension and an empty media-type,
@@ -91,6 +95,18 @@ ST_UNICODE_SLUGS = True
 ST_UNIQUE_EMAILS = True
 #: Make emails case insensitive
 ST_CASE_INSENSITIVE_EMAILS = True
+
+#: Make user-names case insensitive
+#:
+#: .. Note::
+#:     This can be set to ``False`` at any time,
+#:     however setting it back to ``True`` requires
+#:     taking care of clashing users,
+#:     i.e: ``someuser``, ``SomeUser`` and ``SoMeUsEr``,
+#:     only one of those users will be able log-in
+#:     (the one in lowercase). Removing clashing users
+#:     is usually not possible.
+ST_CASE_INSENSITIVE_USERNAMES = True
 
 # Tests helper
 ST_TESTS_RATELIMIT_NEVER_EXPIRE = False

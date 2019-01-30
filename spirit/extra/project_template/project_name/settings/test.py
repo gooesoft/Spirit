@@ -15,7 +15,7 @@ INSTALLED_APPS += [
     'spirit.core.tests',
 ]
 
-ROOT_URLCONF = 'spirit.urls'
+ROOT_URLCONF = 'project.project.urls'
 
 USE_TZ = True
 
@@ -54,18 +54,11 @@ PASSWORD_HASHERS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Keep templates in memory
-del TEMPLATES[0]['APP_DIRS']
-TEMPLATES[0]['OPTIONS']['loaders'] = [
-    ('django.template.loaders.cached.Loader', (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )),
-]
-
 TEMPLATES[0]['OPTIONS']['debug'] = True
 
 ST_RATELIMIT_CACHE = 'st_rate_limit'
+ST_UPLOAD_FILE_ENABLED = True
+ST_ORDERED_CATEGORIES = True
 
 HAYSTACK_CONNECTIONS['default']['STORAGE'] = 'ram'
 HAYSTACK_LIMIT_TO_REGISTERED_MODELS = False

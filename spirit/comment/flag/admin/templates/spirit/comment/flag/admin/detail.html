@@ -16,7 +16,7 @@
     {% if flag.moderator %}
         <dl class="preference">
            <dt class="preference-label">{% trans "Moderated by" %}:</dt>
-           <dd class="preference-desc"><a href="{{ flag.moderator.get_absolute_url }}">{{ flag.moderator.username }}</a></dd>
+           <dd class="preference-desc"><a href="{{ flag.moderator.get_absolute_url }}">{{ flag.moderator.st.nickname }}</a></dd>
         </dl>
     {% endif %}
 
@@ -41,7 +41,7 @@
                         <img class="comment-avatar" src="{% get_gravatar_url user=flag.comment.user size=50 %}" />
 
                         <div class="comment-username">
-                            <a href="{{ flag.comment.user.st.get_absolute_url }}">{{ flag.comment.user.username }}</a>
+                            <a href="{{ flag.comment.user.st.get_absolute_url }}">{{ flag.comment.user.st.nickname }}</a>
                         </div>
                     </div>
 
@@ -51,7 +51,11 @@
                 </div>
 
 				<ul class="comment-actions">
-					<li><a href="#">{% trans "delete" %}</a></li>
+                    {% if not flag.comment.is_removed %}
+                        <li><a class="js-post" href="{% url "spirit:comment:delete" flag.comment.pk %}?next={% firstof request.get_full_path|urlencode '/' %}">{% trans "delete" %}</a></li>
+                    {% else %}
+                        <li><a class="js-post" href="{% url "spirit:comment:undelete" flag.comment.pk %}?next={% firstof request.get_full_path|urlencode '/' %}">{% trans "undelete" %}</a></li>
+                    {% endif %}
 				</ul>
             </div>
 
@@ -73,7 +77,7 @@
                         <img class="comment-avatar" src="{% get_gravatar_url user=f.user size=50 %}" />
 
                         <div class="comment-username">
-                            <a href="{{ f.user.st.get_absolute_url }}">{{ f.user.username }}</a>
+                            <a href="{{ f.user.st.get_absolute_url }}">{{ f.user.st.nickname }}</a>
                         </div>
                     </div>
 

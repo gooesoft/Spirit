@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import datetime
 
 from django.test import TestCase, RequestFactory
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -89,6 +89,30 @@ class AdminViewTest(TestCase):
 
         self.assertFalse(form.is_valid())
 
+    def test_category_move_up_down(self):
+        """Should order the category when moving up/down"""
+        utils.login(self)
+        self.another_category = utils.create_category()
+        response = self.client.post(
+            reverse(
+                'spirit:admin:category:move_dn',
+                kwargs={"category_id": self.category.pk, }))
+        expected_url = reverse("spirit:admin:category:index")
+        self.assertRedirects(response, expected_url, status_code=302)
+        self.category.refresh_from_db()
+        self.another_category.refresh_from_db()        
+        self.assertTrue(self.category.sort > self.another_category.sort)
+
+        response = self.client.post(
+            reverse(
+                'spirit:admin:category:move_up',
+                kwargs={"category_id": self.category.pk, }))
+        expected_url = reverse("spirit:admin:category:index")
+        self.assertRedirects(response, expected_url, status_code=302)
+        self.category.refresh_from_db()
+        self.another_category.refresh_from_db()        
+        self.assertTrue(self.category.sort < self.another_category.sort)
+
 
 class AdminFormTest(TestCase):
 
@@ -113,6 +137,8 @@ class AdminFormTest(TestCase):
         }
         form = CategoryForm(data=form_data)
         self.assertEqual(form.is_valid(), True)
+        category = form.save()
+        self.assertTrue(category.sort > 0)
 
     def test_category_invalid_parent(self):
         """
